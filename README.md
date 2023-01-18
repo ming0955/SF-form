@@ -33,15 +33,13 @@ import { SF_Form } from 'signup-flow-package'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <React.StrictMode>
-        <div>
-            <h2>Default counter</h2>
-            <SF_Form />
-        </div>
-        <hr />
-        <div>
-            <h2>Counter with predefined value</h2>
-            <SF_Form value={5} />
-        </div>
+        <SF_Form
+          firstColor={'#fff'}
+          secondColor={'#000'}
+          headingTitle={'SinUp-Flow-Application'}
+          subCaption={'subcation'}
+          steps={1}
+        />
     </React.StrictMode>,
 )
 
