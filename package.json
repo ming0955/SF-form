@@ -1,6 +1,6 @@
 {
   "name": "signup-flow-package",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "My first react typescript package",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -32,7 +32,7 @@
     "typescript",
     "awesome-project"
   ],
-  "author": "Igor Gaponov (gapon2401)",
+  "author": "Ming Xue (ming0955)",
   "license": "MIT",
   "devDependencies": {
     "@testing-library/react": "^13.3.0",

@@ -1,3 +1,3 @@
-import SF_Form from './components/App'
+import SF_Form from './components/SignUp'
 
 export { SF_Form }
