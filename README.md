@@ -5,7 +5,7 @@
 ![npm-typescript]
 [![License][github-license]][github-license-url]
 
-It is SF form for signup-flow-app. This will be updated under the developing
+It is SF form for signup-flow-app. This will be updated under the developing.
 
 <!-- [**Live Demo**](https://ming0955.github.io/SF-form/) -->
 
