@@ -47,8 +47,8 @@ root.render(
 
 [npm-url]: https://www.npmjs.com/package/signup-flow-package
 [npm-image]: https://img.shields.io/npm/v/signup-flow-package
-[github-license]: https://img.shields.io/github/license/gapon2401/signup-flow-package
-[github-license-url]: https://github.com/gapon2401/signup-flow-package/blob/master/LICENSE
-[github-build]: https://github.com/gapon2401/signup-flow-package/actions/workflows/publish.yml/badge.svg
-[github-build-url]: https://github.com/gapon2401/signup-flow-package/actions/workflows/publish.yml
+[github-license]: https://img.shields.io/github/license/ming0955/SF-form
+[github-license-url]: https://github.com/ming0955/ming0955/SF-form/blob/main/LICENSE
+[github-build]: https://github.com/ming0955/SF-form/actions/workflows/npm-publish.yml/badge.svg?branch=main&event=create
+[github-build-url]: https://github.com/ming0955/SF-form/actions/workflows/publish.yml
 [npm-typescript]: https://img.shields.io/npm/types/signup-flow-package
