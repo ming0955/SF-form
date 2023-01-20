@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import { SignUpContainer } from './styles'
 
 type Props = {
   firstColor?: string
@@ -8,16 +9,18 @@ type Props = {
   steps?: number
   stepTabs?: ReactElement
 }
-const SF_Form = ({ firstColor, secondColor, headingTitle, subCaption, steps }: Props) => {
+
+const SignUpForm = ({ firstColor, secondColor, headingTitle, subCaption, steps, stepTabs }: Props) => {
   return (
-    <div>
+    <SignUpContainer>
       <p>firstColor: {firstColor}</p>
       <p>secondColor: {secondColor}</p>
       <p>headingTitle: {headingTitle}</p>
       <p>subCaption: {subCaption}</p>
       <p>steps: {steps}</p>
-    </div>
+      <span>component: {stepTabs}</span>
+    </SignUpContainer>
   )
 }
 
-export default SF_Form
+export default SignUpForm
