@@ -23,22 +23,23 @@ yarn add -D signup-flow-package
 
 ## Usage :
 
-Add `SF_Form` to your component:
+Add `SignUpForm` to your component:
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { SF_Form } from 'signup-flow-package'
+import { SignUpForm } from 'signup-flow-package'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <React.StrictMode>
-        <SF_Form
+        <SignUpForm
           firstColor={'#fff'}
           secondColor={'#000'}
           headingTitle={'SinUp-Flow-Application'}
           subCaption={'subcation'}
           steps={1}
+          stepTabs={<button>Submit</button>}
         />
     </React.StrictMode>,
 )
