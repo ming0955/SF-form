@@ -5,8 +5,4 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
 `
