@@ -1,3 +1,3 @@
-import SF_Form from './components/SignUpForm/Index'
+import SignUpForm from './SignUpForm/Index'
 
-export { SF_Form }
+export { SignUpForm }
