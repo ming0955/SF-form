@@ -33,14 +33,14 @@ import { SignUpForm } from 'signup-flow-package'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
     <React.StrictMode>
-        <SignUpForm
-          firstColor={'#fff'}
-          secondColor={'#000'}
-          headingTitle={'SinUp-Flow-Application'}
-          subCaption={'subcation'}
-          steps={1}
-          stepTabs={<button>Submit</button>}
-        />
+      <SignUpForm
+        firstColor="#88B431"
+        secondColor="#D9D9D9"
+        headingTitle="Enter Your Information"
+        subCaption="Please fill out the following fields to create an account: *Email and password are case sensitive"
+        step={1}
+        onSubmit={onSubmit}
+      />
     </React.StrictMode>,
 )
 

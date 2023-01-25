@@ -1,3 +1,3 @@
-import SignUpForm from './SignUpForm/Index'
+import SignUpForm from './SignUpForm'
 
 export { SignUpForm }

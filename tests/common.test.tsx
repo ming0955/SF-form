@@ -7,6 +7,12 @@ import { SignUpForm } from '../src'
 
 describe('Common render', () => {
   it('renders without crashing', () => {
-    render(<SignUpForm />)
+    render(
+      <SignUpForm
+        onSubmit={function (): void {
+          throw new Error('Function not implemented.')
+        }}
+      />,
+    )
   })
 })
