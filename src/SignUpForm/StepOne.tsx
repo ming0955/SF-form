@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
+import './phone-number-input-style.css'
 import CancelIcon from '@mui/icons-material/Cancel'
 import ForwardIcon from '@mui/icons-material/Forward'
 import { IstepOneProps, IFormProps } from './types'
