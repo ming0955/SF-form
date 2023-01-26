@@ -1,7 +1,12 @@
 export interface IstepOneProps {
   headingTitle?: string
   subCaption?: string
-  onSubmit: (data: IFormProps) => void
+  steps?: number
+  setCurrentStep?: (step: number) => void
+  currentStep: number
+  setData?: (data: IFormProps) => void
+  data?: IFormProps
+  onSubmit?: (data: IFormProps) => void
 }
 
 export interface IStep {
@@ -16,17 +21,18 @@ export interface IinputStyleProps {
   fullWidth?: boolean
 }
 
-export interface IinFieldsStyleProps {
-  invalid?: boolean
+export interface ErrorTextStyleProps {
+  isError?: boolean | undefined
   fullWidth?: boolean
 }
 
 export interface IFormProps {
-  firstName: string
-  lastName: string
-  addresses?: string | undefined
-  zipCode: number
-  city: string
-  phoneNumber: string
-  email: string
+  firstName?: string
+  lastName?: string
+  address?: string | undefined
+  zipCode?: string
+  city?: string
+  phoneNumber?: string
+  email?: string
+  cardNumber?: string
 }

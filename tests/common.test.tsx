@@ -12,6 +12,8 @@ describe('Common render', () => {
         onSubmit={function (): void {
           throw new Error('Function not implemented.')
         }}
+        headingTitle={[]}
+        subCaption={[]}
       />,
     )
   })

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { SF_FormColor } from './color.enum'
-import { IStep, IinputStyleProps, IinFieldsStyleProps } from './types'
+import { IStep, IinputStyleProps, ErrorTextStyleProps } from './types'
 
 export const SignUpContainer = styled.div`
   width: 360px;
@@ -9,7 +9,8 @@ export const SignUpContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid red; */
+  overflow: hidden;
+  padding: 1em 0;
 `
 
 export const StepContainer = styled.div`
@@ -20,13 +21,15 @@ export const SteperLine = styled.div<IStep>`
   position: relative;
   width: 50%;
   height: 2px;
-  background: ${(props) => (props.active ? props.firstColor || '#88B431' : props.secondColor || '#D9D9D9')};
+  background: ${(props) =>
+    props.active ? props.firstColor || SF_FormColor.PRIMARY : props.secondColor || SF_FormColor.SECONDARY};
   &:after {
     content: '';
     width: 18px;
     height: 18px;
     border-radius: 100%;
-    background: ${(props) => (props.active ? props.firstColor || '#88B431' : props.secondColor || '#D9D9D9')};
+    background: ${(props) =>
+      props.active ? props.firstColor || SF_FormColor.PRIMARY : props.secondColor || SF_FormColor.SECONDARY};
     right: ${(props) => (props.stepNum === 1 ? '120px' : 'unset')};
     left: ${(props) => (props.stepNum === 2 ? '120px' : 'unset')};
     position: absolute;
@@ -46,7 +49,7 @@ export const SteperLine = styled.div<IStep>`
     right: ${(props) => (props.stepNum === 1 ? '120px' : 'unset')};
     left: ${(props) => (props.stepNum === 2 ? '120px' : 'unset')};
     font-size: 9px;
-    color: ${(props) => (props.stepNum === 1 ? SF_FormColor.TEXTACTIVE : SF_FormColor.TEXTCOLOR)};
+    color: ${(props) => (props.active ? SF_FormColor.TEXTACTIVE : SF_FormColor.TEXTCOLOR)};
   }
 `
 
@@ -63,7 +66,7 @@ export const HeadingTitle = styled.h2`
   font-size: 22px;
   line-height: 26px;
   color: ${SF_FormColor.PRIMARY};
-  margin: 25px 0 10px;
+  margin: 40px 0 10px;
 `
 
 export const SubCaption = styled.p`
@@ -79,7 +82,7 @@ export const SubCaption = styled.p`
 
 export const Form = styled.form``
 
-export const Fields = styled.div<IinFieldsStyleProps>`
+export const Fields = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -88,22 +91,6 @@ export const Fields = styled.div<IinFieldsStyleProps>`
   margin-top: 1em;
   height: 37px;
   border: 1px solid ${SF_FormColor.BORDER};
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    height: 1px;
-    width: ${(props) => (props.fullWidth ? '100%' : '52%')};
-    display: block;
-    background-color: ${(props) => (props.invalid ? SF_FormColor.RED : 'transparent')};
-    transition: all 0.5s ease-in-out;
-  }
-
-  & input {
-    width: ${(props) => (props.fullWidth ? '90%' : '42%')};
-  }
 
   .PhoneInput {
     display: flex;
@@ -234,11 +221,14 @@ export const PreIcon = styled.div`
 `
 
 export const Input = styled.input<IinputStyleProps>`
+  position: relative;
   border: none;
   outline: none !important;
   display: flex;
+  width: ${(props) => (props.fullWidth ? '90%' : '42%')};
   color: ${SF_FormColor.TEXTACTIVE};
   border-right: ${(props) => props.borderRight && `1px solid ${SF_FormColor.BORDER}`};
+
   &::placeholder {
     color: ${SF_FormColor.PLACEHOLDER};
   }
@@ -252,16 +242,180 @@ export const Input = styled.input<IinputStyleProps>`
   }
 `
 
-export const ErrorText = styled.p`
+export const ErrorBox = styled.div`
   display: flex;
-  flex: 1;
-  align-items: center;
+  justify-content: space-between;
+`
+
+export const ErrorText = styled.p<ErrorTextStyleProps>`
+  position: relative;
+  display: flex;
+  width: 47%;
   margin: 4px 0 8px;
   font-size: 11px;
   line-height: 18px;
   color: ${SF_FormColor.RED};
 
+  span {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  span::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -2px;
+    height: 1px;
+    width: ${(props) => (props.fullWidth ? '380px' : '195px')};
+    display: block;
+    background-color: ${SF_FormColor.RED};
+    transition: all 0.5s ease-in-out;
+  }
+
   svg {
     font-size: 14px;
   }
+`
+
+export const CardWrapper = styled.div`
+  display: flex;
+  width: 100%;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+`
+
+export const CardIcon = styled.div`
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: flex;
+  width: 61px;
+  height: 25px;
+
+  img {
+    width: 100%;
+  }
+`
+
+export const AgreeBox = styled.div`
+  display: flex;
+  margin-top: 1em;
+  align-items: center;
+
+  input {
+    cursor: pointer;
+    width: fit-content;
+  }
+`
+
+export const Label = styled.label`
+  color: ${SF_FormColor.TEXTCOLOR};
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+`
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  position: relative;
+`
+
+export const StepButton = styled.button`
+  position: relative;
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 23px;
+  color: #e3e3e3;
+  text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
+  padding: 10px 60px 8px 35px;
+  background: linear-gradient(180deg, #8bb832 0%, #749c27 100%);
+  box-shadow: inset 0px -0.5px 0px 0.5px #4c6c0c;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    transform: scale(0.99);
+  }
+  &:active {
+    transform: scale(1);
+  }
+`
+
+export const Badge = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Text = styled.span`
+  font-size: inherit;
+`
+
+export const ButtonIconWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 33px;
+  height: 27px;
+  top: 7px;
+  right: 3px;
+  border-left: 2px solid #e3e3e3;
+
+  svg {
+    fill: #e3e3e3;
+  }
+
+  img {
+    width: 19px;
+  }
+`
+
+export const BackButton = styled.button`
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  margin-right: 15px;
+  height: 17px;
+  color: #343434;
+
+  &:hover {
+    border-bottom: 1px solid #6e6e53;
+    transform: scale(0.99);
+  }
+  &:active {
+    transform: scale(1);
+  }
+`
+
+export const TermsCondition = styled.p`
+  margin-top: 25px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #343434;
 `
