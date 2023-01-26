@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components'
 import { SF_FormColor } from './color.enum'
-import { IStep, IinputStyleProps, ErrorTextStyleProps } from './types'
+import { IStep, IinputStyleProps, ErrorTextStyleProps, IFieldsStyleProps } from './types'
 
 export const SignUpContainer = styled.div`
-  width: 360px;
-  max-width: 360px;
-  min-height: 300px;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 370px;
+  max-width: 370px;
+  height: 100%;
+  min-height: 300px;
   overflow: hidden;
   padding: 1em 0;
 `
@@ -82,7 +82,7 @@ export const SubCaption = styled.p`
 
 export const Form = styled.form``
 
-export const Fields = styled.div`
+export const Fields = styled.div<IFieldsStyleProps>`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -90,7 +90,8 @@ export const Fields = styled.div`
   padding: 0em 0.5em;
   margin-top: 1em;
   height: 37px;
-  border: 1px solid ${SF_FormColor.BORDER};
+  border: ${(props) => (props.coverBack ? `1px solid #008000` : `1px solid ${SF_FormColor.BORDER}`)};
+  background-color: ${(props) => (props.coverBack ? '#F4FFED' : 'transparent')};
 
   .PhoneInput {
     display: flex;
@@ -227,6 +228,7 @@ export const Input = styled.input<IinputStyleProps>`
   display: flex;
   width: ${(props) => (props.fullWidth ? '90%' : '42%')};
   color: ${SF_FormColor.TEXTACTIVE};
+  background-color: transparent;
   border-right: ${(props) => props.borderRight && `1px solid ${SF_FormColor.BORDER}`};
 
   &::placeholder {
@@ -250,7 +252,8 @@ export const ErrorBox = styled.div`
 export const ErrorText = styled.p<ErrorTextStyleProps>`
   position: relative;
   display: flex;
-  width: 47%;
+  width: ${(props) => (props.fullWidth ? '100%' : '49%')};
+  white-space: nowrap;
   margin: 4px 0 8px;
   font-size: 11px;
   line-height: 18px;

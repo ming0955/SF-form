@@ -17,6 +17,7 @@ import {
   CardIcon,
   Label,
   AgreeBox,
+  ErrorBox,
 } from './styles'
 import { CardImage, SPAIcon } from './Icons'
 
@@ -37,6 +38,7 @@ export const StepTwo = ({
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<IFormProps>()
 
   useEffect(() => {
@@ -89,7 +91,7 @@ export const StepTwo = ({
         <CardImage />
       </CardWrapper>
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepTwoForm'>
-        <Fields>
+        <Fields coverBack={data?.firstName ? true : false}>
           <PreIcon>
             <ForwardIcon />
           </PreIcon>
@@ -116,16 +118,18 @@ export const StepTwo = ({
           </CardIcon>
         </Fields>
         {errors.cardNumber && (
-          <>
-            <ErrorText>
-              <CancelIcon />
-              &nbsp; Please enter valid card number.
+          <ErrorBox>
+            <ErrorText fullWidth>
+              <span>
+                <CancelIcon />
+                &nbsp; Please enter valid card number.
+              </span>
             </ErrorText>
-          </>
+          </ErrorBox>
         )}
         <AgreeBox>
-          <Input type='checkbox' id='agrre-check' name='vehicle2' value='Car' required />
-          <Label htmlFor='vehicle2'> I accept the general terms and conditions </Label>
+          <Input type='checkbox' id='agrre-check' name='agrre-check' required />
+          <Label htmlFor='agrre-check'> I accept the general terms and conditions </Label>
         </AgreeBox>
       </Form>
     </FormContainer>

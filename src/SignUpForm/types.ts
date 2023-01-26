@@ -16,6 +16,10 @@ export interface IStep {
   secondColor?: string
 }
 
+export interface IFieldsStyleProps {
+  coverBack?: boolean | undefined
+}
+
 export interface IinputStyleProps {
   borderRight?: boolean
   fullWidth?: boolean
