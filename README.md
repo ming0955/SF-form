@@ -12,13 +12,13 @@ It is SF form for signup-flow-app. This will be updated under the developing.
 ## Installation:
 
 ```bash
-npm install signup-flow-package --save-dev
+npm install signup-flow-package
 ```
 
 or
 
 ```bash
-yarn add -D signup-flow-package
+yarn add signup-flow-package
 ```
 
 ## Usage :
