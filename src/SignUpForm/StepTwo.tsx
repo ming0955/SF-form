@@ -38,7 +38,6 @@ export const StepTwo = ({
     register,
     handleSubmit,
     formState: { errors },
-    control,
   } = useForm<IFormProps>()
 
   useEffect(() => {
