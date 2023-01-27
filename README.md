@@ -21,29 +21,54 @@ or
 yarn add signup-flow-package
 ```
 
-## Usage :
+## Usage Example:
 
 Add `SignUpForm` to your component:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { SignUpForm } from 'signup-flow-package'
+import Layout from '../layout/Layout';
+import { SignUpForm } from 'signup-flow-package';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-root.render(
-    <React.StrictMode>
-      <SignUpForm
-        firstColor="#88B431"
-        secondColor="#D9D9D9"
-        headingTitle="Enter Your Information"
-        subCaption="Please fill out the following fields to create an account: *Email and password are case sensitive"
-        step={1}
-        onSubmit={onSubmit}
-      />
-    </React.StrictMode>,
-)
+interface IFormProps {
+  firstName?: string;
+  lastName?: string;
+  address?: string | undefined;
+  zipCode?: string;
+  city?: string;
+  phoneNumber?: string;
+  email?: string;
+  cardNumber?: string;
+}
 
+export default function Home() {
+  const onSubmit = (data: IFormProps) => {
+    console.log(data);
+  };
+  
+  return (
+    <Layout>
+      <h2> Get the new iPhone 13 </h2>
+
+      <div>
+        <SignUpForm
+          firstColor='#88B431'
+          secondColor='#D9D9D9'
+          headingTitle={[
+            'Enter Your Information',
+            'Enter Your Payment Details',
+          ]}
+          subCaption={[
+            'Please fill out the following fields to create an account: *Email and password are case sensitive',
+            '',
+          ]}
+          steps={2}
+          onSubmit={onSubmit}
+        />
+      </div>
+      <>
+    </Layout>
+  );
+}
 ```
 
 [npm-url]: https://www.npmjs.com/package/signup-flow-package
