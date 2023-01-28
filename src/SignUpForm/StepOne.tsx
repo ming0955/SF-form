@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import PhoneInput from 'react-phone-input-2'
 import CancelIcon from '@mui/icons-material/Cancel'
 import ForwardIcon from '@mui/icons-material/Forward'
 import { IstepOneProps, IFormProps } from './types'
-import { FormContainer, HeadingTitle, SubCaption, Form, Fields, Input, ErrorText, PreIcon, ErrorBox } from './styles'
+import * as PSC from './phoneInput.style'
+import {
+  FormContainer,
+  HeadingTitle,
+  SubCaption,
+  Form,
+  Fields,
+  Input,
+  ErrorText,
+  PreIcon,
+  InputWrapper,
+  MiddleBorder,
+  FieldBox,
+} from './styles'
+import { errorMessages } from './constants.enum'
 
 export const StepOne = ({
   headingTitle,
@@ -15,14 +29,18 @@ export const StepOne = ({
   data,
   setData,
   onSubmit,
+  validedFields,
+  setValidedFields,
 }: IstepOneProps) => {
   const [subCaptionTexts, setSubCaptionTexts] = useState<string[]>([])
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
     control,
+    getValues,
+    setError,
+    formState: { errors, dirtyFields },
   } = useForm<IFormProps>({
     defaultValues: {
       firstName: data?.firstName || '',
@@ -33,6 +51,7 @@ export const StepOne = ({
       phoneNumber: data?.phoneNumber || '',
       email: data?.email || '',
     },
+    mode: 'all',
   })
 
   useEffect(() => {
@@ -54,6 +73,28 @@ export const StepOne = ({
     }
   }
 
+  const ErrorBoxs = ({ message }: { message: string }) => {
+    return (
+      <ErrorText>
+        <CancelIcon />
+        &nbsp;{message}
+      </ErrorText>
+    )
+  }
+
+  type keyType = 'firstName' | 'lastName' | 'address' | 'zipCode' | 'city' | 'phoneNumber' | 'email'
+
+  const checkValid = (key: keyType) => {
+    const val = getValues(key)
+    setValidedFields({
+      ...validedFields,
+      [key]: val && val !== '' ? true : false,
+    })
+    if (!val) {
+      setError(key, { message: errorMessages[key] })
+    }
+  }
+
   return (
     <FormContainer>
       <HeadingTitle>{headingTitle || 'Enter Your Information'}</HeadingTitle>
@@ -67,137 +108,158 @@ export const StepOne = ({
       })}
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepOneForm'>
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input
-            placeholder='First Name'
-            autoComplete='off'
-            {...register('firstName', { required: true })}
-            borderRight
-          />
-          <Input placeholder='Last Name' autoComplete='off' {...register('lastName', { required: true })} />
+          <FieldBox>
+            <InputWrapper
+              borderRemove={'right'}
+              isDirty={dirtyFields.firstName && !errors.firstName}
+              isValid={validedFields.firstName}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input
+                placeholder='First Name'
+                autoComplete='off'
+                {...register('firstName', { required: true })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.firstName && <ErrorBoxs message={errors.firstName.message || errorMessages.firstName} />}
+          </FieldBox>
+          <FieldBox>
+            <InputWrapper
+              borderRemove={'left'}
+              isDirty={dirtyFields.lastName && !errors.lastName}
+              isValid={validedFields.lastName}
+            >
+              <MiddleBorder />
+              <Input
+                placeholder='Last Name'
+                autoComplete='off'
+                {...register('lastName', { required: true })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.lastName && <ErrorBoxs message={errors.lastName.message || errorMessages.lastName} />}
+          </FieldBox>
         </Fields>
-        {(errors.firstName || errors.lastName) && (
-          <ErrorBox>
-            <ErrorText>
-              {errors.firstName && (
-                <span>
-                  <CancelIcon />
-                  &nbsp;Please enter your Firstname.
-                </span>
-              )}
-            </ErrorText>
-            <ErrorText>
-              {errors.lastName && (
-                <span>
-                  <CancelIcon />
-                  &nbsp;Please enter your Lastname.
-                </span>
-              )}
-            </ErrorText>
-          </ErrorBox>
-        )}
 
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input placeholder='Addresses' autoComplete='off' {...register('address', { required: true })} fullWidth />
+          <FieldBox>
+            <InputWrapper
+              borderRemove='none'
+              isDirty={dirtyFields.address && !errors.address}
+              isValid={validedFields.address}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input
+                placeholder='Addresses'
+                autoComplete='off'
+                {...register('address', { required: true })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.address && <ErrorBoxs message={errors.address.message || errorMessages.address} />}
+          </FieldBox>
         </Fields>
-        {errors.address && (
-          <ErrorBox>
-            <ErrorText fullWidth>
-              <span>
-                <CancelIcon />
-                &nbsp; Please enter your Addresses.
-              </span>
-            </ErrorText>
-          </ErrorBox>
-        )}
 
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input placeholder='Zipcode' autoComplete='off' {...register('zipCode', { required: true })} borderRight />
-          <Input placeholder='City' autoComplete='off' {...register('city', { required: true })} />
+          <FieldBox>
+            <InputWrapper
+              borderRemove={'right'}
+              isDirty={dirtyFields.zipCode && !errors.zipCode}
+              isValid={validedFields.zipCode}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input
+                placeholder='Zipcode'
+                autoComplete='off'
+                {...register('zipCode', { required: true })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.zipCode && <ErrorBoxs message={errors.zipCode.message || errorMessages.zipCode} />}
+          </FieldBox>
+          <FieldBox>
+            <InputWrapper borderRemove={'left'} isDirty={dirtyFields.city && !errors.city} isValid={validedFields.city}>
+              <MiddleBorder />
+              <Input
+                placeholder='City'
+                autoComplete='off'
+                {...register('city', { required: true })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.city && <ErrorBoxs message={errors.city.message || errorMessages.city} />}
+          </FieldBox>
         </Fields>
-        {(errors.zipCode || errors.city) && (
-          <ErrorBox>
-            <ErrorText>
-              {errors.zipCode && (
-                <span>
-                  <CancelIcon />
-                  &nbsp;Please enter valid zipcode.
-                </span>
-              )}
-            </ErrorText>
-            <ErrorText>
-              {errors.city && (
-                <span>
-                  <CancelIcon />
-                  &nbsp;Please enter your city .
-                </span>
-              )}
-            </ErrorText>
-          </ErrorBox>
-        )}
 
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Controller
-            name='phoneNumber'
-            control={control}
-            rules={{
-              required: 'Enter your phone number.',
-              validate: (value) => isValidPhoneNumber(value ? value : '') || 'Incorrect phone number.',
-            }}
-            render={({ field: { value, onChange } }) => (
-              <PhoneInput defaultCountry='US' placeholder='Phone Number' value={value} onChange={onChange} />
-            )}
-          />
+          <FieldBox>
+            <InputWrapper
+              borderRemove='none'
+              isDirty={dirtyFields.phoneNumber && !errors.phoneNumber}
+              isValid={validedFields.phoneNumber}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Controller
+                name='phoneNumber'
+                control={control}
+                rules={{
+                  required: true,
+                }}
+                render={({ field: { value, onChange } }) => (
+                  <PSC.PhoneInputWrapper>
+                    <PhoneInput
+                      country={'gb'}
+                      preferredCountries={['gb']}
+                      regions={['europe']}
+                      disableCountryCode={true}
+                      placeholder={'Phone Number'}
+                      enableSearch
+                      value={value}
+                      onChange={onChange}
+                      onBlur={() => checkValid('phoneNumber')}
+                    />
+                  </PSC.PhoneInputWrapper>
+                )}
+              />
+            </InputWrapper>
+            {errors.phoneNumber && <ErrorBoxs message={errors.phoneNumber.message || errorMessages.phoneNumber} />}
+          </FieldBox>
         </Fields>
-        {errors.phoneNumber && (
-          <ErrorBox>
-            <ErrorText fullWidth>
-              <span>
-                <CancelIcon />
-                &nbsp;{errors.phoneNumber?.message}
-              </span>
-            </ErrorText>
-          </ErrorBox>
-        )}
-
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input
-            placeholder='Email'
-            autoComplete='off'
-            {...register('email', {
-              required: 'Please enter your Email address.',
-              pattern: {
-                value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                message: 'Incorrect Email address.',
-              },
-            })}
-            fullWidth
-          />
+          <FieldBox>
+            <InputWrapper
+              borderRemove='none'
+              isDirty={dirtyFields.email && !errors.email}
+              isValid={validedFields.email}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input
+                placeholder='Email'
+                autoComplete='off'
+                {...register('email', {
+                  required: true,
+                  pattern: {
+                    value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: 'Incorrect Email address.',
+                  },
+                })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+            </InputWrapper>
+            {errors.email && <ErrorBoxs message={errors.email.message || errorMessages.email} />}
+          </FieldBox>
         </Fields>
-        {errors.email && (
-          <ErrorBox>
-            <ErrorText fullWidth>
-              <span>
-                <CancelIcon />
-                &nbsp;{errors.email?.message}
-              </span>
-            </ErrorText>
-          </ErrorBox>
-        )}
       </Form>
     </FormContainer>
   )

@@ -7,6 +7,25 @@ export interface IstepOneProps {
   setData?: (data: IFormProps) => void
   data?: IFormProps
   onSubmit?: (data: IFormProps) => void
+  validedFields: IvalidedFields
+  setValidedFields: (data: IvalidedFields) => void
+}
+
+export interface IStepButtons {
+  setCurrentStep?: (step: number) => void
+  currentStep: number
+  steps?: number
+}
+
+export interface IvalidedFields {
+  firstName: boolean
+  lastName: boolean
+  address: boolean
+  zipCode: boolean
+  city: boolean
+  phoneNumber: boolean
+  email: boolean
+  cardNumber: boolean
 }
 
 export interface IStep {
@@ -18,6 +37,12 @@ export interface IStep {
 
 export interface IFieldsStyleProps {
   coverBack?: boolean | undefined
+}
+
+export interface IinputWrapperStyleProps {
+  borderRemove: string | undefined
+  isDirty: boolean | undefined
+  isValid: boolean | undefined
 }
 
 export interface IinputStyleProps {

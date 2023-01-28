@@ -1,17 +1,24 @@
 import React from 'react'
 import { StepContainer, SteperLine } from './styles'
-
 interface IStepProps {
   currentStep: number
   firstColor: string
   secondColor: string
+  steps?: number
 }
 
-export const Steps = ({ currentStep, firstColor, secondColor }: IStepProps) => {
+export const Steps = ({ currentStep, firstColor, secondColor, steps }: IStepProps) => {
   return (
     <StepContainer>
-      <SteperLine active={currentStep >= 1} stepNum={1} firstColor={firstColor} secondColor={secondColor} />
-      <SteperLine active={currentStep >= 2} stepNum={2} firstColor={firstColor} secondColor={secondColor} />
+      {[...Array(steps).keys()].map((i) => (
+        <SteperLine
+          key={i}
+          active={currentStep === i + 1}
+          stepNum={i + 1}
+          firstColor={firstColor}
+          secondColor={secondColor}
+        />
+      ))}
     </StepContainer>
   )
 }

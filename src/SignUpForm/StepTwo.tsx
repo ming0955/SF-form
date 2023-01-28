@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IFormProps, IstepOneProps } from './types'
 import ForwardIcon from '@mui/icons-material/Forward'
 import CancelIcon from '@mui/icons-material/Cancel'
-
+import { errorMessages } from './constants.enum'
+import { CardImage, SPAIcon } from './Icons'
 import {
   FormContainer,
   HeadingTitle,
@@ -17,9 +19,13 @@ import {
   CardIcon,
   Label,
   AgreeBox,
-  ErrorBox,
+  FieldBox,
+  InputWrapper,
+  MiddleBorder,
+  UserName,
+  FirstName,
+  LastName,
 } from './styles'
-import { CardImage, SPAIcon } from './Icons'
 
 export const StepTwo = ({
   headingTitle,
@@ -30,6 +36,8 @@ export const StepTwo = ({
   setData,
   data,
   onSubmit,
+  validedFields,
+  setValidedFields,
 }: IstepOneProps) => {
   const [subCaptionTexts, setSubCaptionTexts] = useState<string[]>([])
   const [cardNumber, setCardNumber] = useState('')
@@ -37,7 +45,9 @@ export const StepTwo = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    getValues,
+    setError,
+    formState: { errors, dirtyFields },
   } = useForm<IFormProps>()
 
   useEffect(() => {
@@ -75,6 +85,37 @@ export const StepTwo = ({
     }
   }
 
+  const ErrorBoxs = ({ message }: { message: string }) => {
+    return (
+      <ErrorText>
+        <CancelIcon />
+        &nbsp;{message}
+      </ErrorText>
+    )
+  }
+
+  type keyType = 'cardNumber'
+
+  const checkValid = (key: keyType) => {
+    const val = getValues(key)
+    setValidedFields({
+      ...validedFields,
+      [key]: val && val !== '' ? true : false,
+    })
+    if (!val) {
+      setError(key, { message: errorMessages[key] })
+    }
+  }
+
+  const UserNameBox = () => {
+    return (
+      <UserName>
+        <FirstName>{data?.firstName}</FirstName>
+        <LastName>{data?.lastName}</LastName>
+      </UserName>
+    )
+  }
+
   return (
     <FormContainer>
       <HeadingTitle>{headingTitle || 'Enter Your Payment Details'}</HeadingTitle>
@@ -88,44 +129,54 @@ export const StepTwo = ({
       })}
       <CardWrapper>
         <CardImage />
+        {data?.firstName && <UserNameBox />}
       </CardWrapper>
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepTwoForm'>
-        <Fields coverBack={data?.firstName ? true : false}>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input borderRight value={data?.firstName} disabled />
-          <Input value={data?.lastName} disabled />
+        <Fields>
+          <FieldBox>
+            <InputWrapper borderRemove={'right'} isDirty isValid>
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input value={data?.firstName} disabled placeholder='First Name' />
+            </InputWrapper>
+          </FieldBox>
+          <FieldBox>
+            <InputWrapper borderRemove={'left'} isDirty isValid>
+              <MiddleBorder />
+              <Input value={data?.lastName} disabled placeholder='Last Name' />
+            </InputWrapper>
+          </FieldBox>
         </Fields>
 
         <Fields>
-          <PreIcon>
-            <ForwardIcon />
-          </PreIcon>
-          <Input
-            placeholder='0000 0000 0000 0000 0000 00'
-            value={cardNumber}
-            autoComplete='off'
-            {...register('cardNumber', {
-              required: true,
-              onChange: (e) => onChangeCardNumber(e),
-            })}
-            fullWidth
-          />
-          <CardIcon>
-            <SPAIcon />
-          </CardIcon>
+          <FieldBox>
+            <InputWrapper
+              borderRemove='none'
+              isDirty={dirtyFields.cardNumber && !errors.cardNumber}
+              isValid={validedFields.cardNumber}
+            >
+              <PreIcon>
+                <ForwardIcon />
+              </PreIcon>
+              <Input
+                placeholder='0000 0000 0000 0000 0000 00'
+                value={cardNumber}
+                autoComplete='off'
+                {...register('cardNumber', {
+                  required: true,
+                  onChange: (e) => onChangeCardNumber(e),
+                })}
+                onBlur={(e) => checkValid(e.target.name as keyType)}
+              />
+              <CardIcon>
+                <SPAIcon />
+              </CardIcon>
+            </InputWrapper>
+            {errors.cardNumber && <ErrorBoxs message={errors.cardNumber.message || errorMessages.cardNumber} />}
+          </FieldBox>
         </Fields>
-        {errors.cardNumber && (
-          <ErrorBox>
-            <ErrorText fullWidth>
-              <span>
-                <CancelIcon />
-                &nbsp; Please enter valid card number.
-              </span>
-            </ErrorText>
-          </ErrorBox>
-        )}
+
         <AgreeBox>
           <Input type='checkbox' id='agrre-check' name='agrre-check' required />
           <Label htmlFor='agrre-check'> I accept the general terms and conditions </Label>
