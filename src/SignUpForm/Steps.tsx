@@ -7,17 +7,12 @@ interface IStepProps {
   steps?: number
 }
 
-export const Steps = ({ currentStep, firstColor, secondColor, steps }: IStepProps) => {
+export const Steps = ({ currentStep, firstColor, secondColor }: IStepProps) => {
+  const arr = [1, 2]
   return (
     <StepContainer>
-      {[...Array(steps).keys()].map((i) => (
-        <SteperLine
-          key={i}
-          active={currentStep === i + 1}
-          stepNum={i + 1}
-          firstColor={firstColor}
-          secondColor={secondColor}
-        />
+      {arr.map((i) => (
+        <SteperLine key={i} active={currentStep === i} stepNum={i} firstColor={firstColor} secondColor={secondColor} />
       ))}
     </StepContainer>
   )
