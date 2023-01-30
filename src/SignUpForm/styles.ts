@@ -5,7 +5,6 @@ import { IStep, IinputStyleProps, ErrorTextStyleProps, IinputWrapperStyleProps }
 export const SignUpContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 370px;
   max-width: 370px;
   padding: 1em 0;
   font-family: sans-serif;
