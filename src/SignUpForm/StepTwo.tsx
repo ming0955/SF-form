@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IFormProps, IstepOneProps } from './types'
