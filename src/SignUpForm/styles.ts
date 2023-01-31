@@ -20,6 +20,7 @@ export const SteperLine = styled.div<IStep>`
   height: 2px;
   background: ${(props) =>
     props.active ? props.firstColor || SF_FormColor.PRIMARY : props.secondColor || SF_FormColor.SECONDARY};
+
   &:after {
     content: '';
     width: 18px;
@@ -78,10 +79,13 @@ export const SubCaption = styled.p`
   color: #747474;
 `
 
-export const Form = styled.form``
+export const Form = styled.form`
+  margin-top: 20px;
+`
 
 export const Fields = styled.div`
   display: flex;
+  height: 67px;
 `
 
 export const FieldBox = styled.div`
@@ -97,8 +101,7 @@ export const InputWrapper = styled.div<IinputWrapperStyleProps>`
   justify-content: space-between;
   align-items: center;
   padding: 0em 0.5em;
-  margin-top: 1em;
-  height: 37px;
+  height: 35px;
   border: 1px solid ${SF_FormColor.BORDER};
 
   ${({ isValid }) =>
@@ -191,7 +194,7 @@ export const ErrorText = styled.p<ErrorTextStyleProps>`
   display: flex;
   width: 100%;
   white-space: nowrap;
-  margin: 4px 0 8px;
+  margin: 2px 0;
   font-size: 11px;
   line-height: 18px;
   color: ${SF_FormColor.RED};
@@ -199,7 +202,7 @@ export const ErrorText = styled.p<ErrorTextStyleProps>`
   &::after {
     content: '';
     position: absolute;
-    top: -5px;
+    top: -3px;
     left: 0px;
     height: 1px;
     width: 100%;
@@ -218,10 +221,10 @@ export const CardWrapper = styled.div`
   display: flex;
   width: 100%;
   margin-top: 15px;
+  height: 200px;
 
   img {
     width: 100%;
-    object-fit: cover;
   }
 `
 
@@ -264,7 +267,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 20px;
 `
 
 export const ButtonWrapper = styled.div`
@@ -281,7 +283,7 @@ export const StepButton = styled.button`
   font-weight: 800;
   font-size: 18px;
   line-height: 25px;
-  color: #e3e3e3;
+  color: #fff;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
   padding: 10px 60px 8px 35px;
   background: linear-gradient(180deg, #8bb832 0%, #749c27 100%);
@@ -342,10 +344,11 @@ export const BackButton = styled.button`
   margin-right: 15px;
   height: 17px;
   color: #343434;
+  border-bottom: 1px solid #6e6e53;
 
   &:hover {
-    border-bottom: 1px solid #6e6e53;
     transform: scale(0.99);
+    border-bottom: none;
   }
   &:active {
     transform: scale(1);
