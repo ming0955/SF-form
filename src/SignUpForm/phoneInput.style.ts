@@ -5,8 +5,8 @@ export const PhoneInputWrapper = styled.div`
   width: calc(100% - 22px);
 
   .react-tel-input {
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
+    font-family: sans-serif;
+    font-size: 13px;
     position: relative;
     width: 100%;
   }
@@ -730,7 +730,7 @@ export const PhoneInputWrapper = styled.div`
   }
   .react-tel-input .form-control {
     position: relative;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.01rem;
     margin-top: 0 !important;
     margin-bottom: 0 !important;

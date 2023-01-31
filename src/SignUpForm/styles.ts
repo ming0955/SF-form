@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { SF_FormColor } from './constants.enum'
-import { IStep, IinputStyleProps, ErrorTextStyleProps, IinputWrapperStyleProps } from './types'
+import { IStep, IinputStyleProps, ErrorTextStyleProps, IinputWrapperStyleProps, IButtonGroupProps } from './types'
 
 export const SignUpContainer = styled.div`
   display: flex;
@@ -85,7 +85,7 @@ export const Form = styled.form`
 
 export const Fields = styled.div`
   display: flex;
-  height: 67px;
+  height: 62px;
 `
 
 export const FieldBox = styled.div`
@@ -195,9 +195,11 @@ export const ErrorText = styled.p<ErrorTextStyleProps>`
   width: 100%;
   white-space: nowrap;
   margin: 2px 0;
-  font-size: 11px;
-  line-height: 18px;
+  font-size: 10px;
+  line-height: 13px;
   color: ${SF_FormColor.RED};
+  font-weight: 600;
+  font-family: serif;
 
   &::after {
     content: '';
@@ -212,7 +214,8 @@ export const ErrorText = styled.p<ErrorTextStyleProps>`
   }
 
   svg {
-    font-size: 14px;
+    font-size: 12px;
+    font-weight: 100;
   }
 `
 
@@ -240,7 +243,7 @@ export const CardIcon = styled.div`
 
 export const AgreeBox = styled.div`
   display: flex;
-  margin-top: -1em;
+  margin-top: -0.7em;
   align-items: center;
 
   input {
@@ -263,10 +266,11 @@ export const Label = styled.label`
   cursor: pointer;
 `
 
-export const ButtonGroup = styled.div`
+export const ButtonGroup = styled.div<IButtonGroupProps>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  margin-top: ${(props) => (props.marginTop ? '19px' : 'none')};
 `
 
 export const ButtonWrapper = styled.div`

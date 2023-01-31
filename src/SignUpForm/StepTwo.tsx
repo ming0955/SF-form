@@ -49,7 +49,9 @@ export const StepTwo = ({
     getValues,
     setError,
     formState: { errors, dirtyFields },
-  } = useForm<IFormProps>()
+  } = useForm<IFormProps>({
+    mode: 'all',
+  })
 
   useEffect(() => {
     const arr = formartSubcaption(subCaption)

@@ -65,3 +65,7 @@ export interface IFormProps {
   email?: string
   cardNumber?: string
 }
+
+export interface IButtonGroupProps {
+  marginTop?: boolean
+}
