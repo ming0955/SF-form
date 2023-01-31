@@ -240,7 +240,7 @@ export const CardIcon = styled.div`
 
 export const AgreeBox = styled.div`
   display: flex;
-  margin-top: 1em;
+  margin-top: -1em;
   align-items: center;
 
   input {
