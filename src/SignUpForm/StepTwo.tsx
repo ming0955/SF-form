@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, ChangeEvent, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { FormControlLabel, Checkbox } from '@mui/material'
 import { IFormProps, IstepOneProps } from './types'
 import ForwardIcon from '@mui/icons-material/Forward'
 import CancelIcon from '@mui/icons-material/Cancel'
 import { errorMessages } from './constants.enum'
-import { CardImage, SPAIcon } from './Icons'
+import { CardImage, CardNumberPlaceHolder, SPAIcon } from './Icons'
 import {
   FormContainer,
   HeadingTitle,
@@ -17,7 +18,6 @@ import {
   ErrorText,
   PreIcon,
   CardIcon,
-  Label,
   AgreeBox,
   FieldBox,
   InputWrapper,
@@ -25,6 +25,7 @@ import {
   UserName,
   FirstName,
   LastName,
+  CardNumber,
 } from './styles'
 
 export const StepTwo = ({
@@ -61,9 +62,9 @@ export const StepTwo = ({
   }
 
   const onChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = e.target.value.replace(/\D/g, '')
+    const result = e.target.value
     const newResult = result
-      .replace(/[^0-9]/g, '')
+      .replace(/[^0-9A-z]/g, '')
       .split('')
       .reduce((str, l, i) => {
         return str + (!i || i % 4 ? '' : ' ') + l
@@ -116,6 +117,10 @@ export const StepTwo = ({
     )
   }
 
+  const CardNumberBox = () => {
+    return <CardNumber>{cardNumber !== '' ? cardNumber : <CardNumberPlaceHolder />}</CardNumber>
+  }
+
   return (
     <FormContainer>
       <HeadingTitle>{headingTitle || 'Enter Your Payment Details'}</HeadingTitle>
@@ -129,7 +134,8 @@ export const StepTwo = ({
       })}
       <CardWrapper>
         <CardImage />
-        {data && data?.firstName && <UserNameBox />}
+        <CardNumberBox />
+        {data?.firstName && <UserNameBox />}
       </CardWrapper>
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepTwoForm'>
         <Fields>
@@ -138,13 +144,13 @@ export const StepTwo = ({
               <PreIcon>
                 <ForwardIcon />
               </PreIcon>
-              <Input value={data?.firstName} disabled placeholder='First Name' />
+              <Input defaultValue={data?.firstName} placeholder='First Name' />
             </InputWrapper>
           </FieldBox>
           <FieldBox>
             <InputWrapper borderRemove={'left'} isDirty isValid>
               <MiddleBorder />
-              <Input value={data?.lastName} disabled placeholder='Last Name' />
+              <Input defaultValue={data?.lastName} placeholder='Last Name' />
             </InputWrapper>
           </FieldBox>
         </Fields>
@@ -178,8 +184,21 @@ export const StepTwo = ({
         </Fields>
 
         <AgreeBox>
-          <Input type='checkbox' id='agrre-check' name='agrre-check' required />
-          <Label htmlFor='agrre-check'> I accept the general terms and conditions </Label>
+          <FormControlLabel
+            control={
+              <Checkbox
+                defaultChecked
+                size='small'
+                sx={{
+                  color: '#88B431',
+                  '&.Mui-checked': {
+                    color: '#88B431',
+                  },
+                }}
+              />
+            }
+            label='I accept the general terms and conditions'
+          />
         </AgreeBox>
       </Form>
     </FormContainer>

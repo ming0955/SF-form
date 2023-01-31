@@ -244,6 +244,11 @@ export const AgreeBox = styled.div`
     cursor: pointer;
     width: fit-content;
   }
+
+  .MuiFormControlLabel-label {
+    color: rgba(116, 116, 116, 0.5);
+    font-size: 14px;
+  }
 `
 
 export const Label = styled.label`
@@ -252,6 +257,7 @@ export const Label = styled.label`
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
+  cursor: pointer;
 `
 
 export const ButtonGroup = styled.div`
@@ -348,14 +354,14 @@ export const BackButton = styled.button`
 
 export const UserName = styled.div`
   position: absolute;
-  bottom: 10%;
+  bottom: 13%;
   left: 7%;
   display: flex;
 `
 
 export const LastName = styled.p`
   margin: 0;
-  text-transform: capitalize;
+  text-transform: uppercase;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
@@ -367,6 +373,18 @@ export const LastName = styled.p`
 
 export const FirstName = styled(LastName)`
   margin-right: 10px;
+`
+
+export const CardNumber = styled.div`
+  position: absolute;
+  bottom: 26%;
+  left: 7%;
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  @media (min-width: 481px) {
+    font-size: 17px;
+  }
 `
 
 export const TermsCondition = styled.div`

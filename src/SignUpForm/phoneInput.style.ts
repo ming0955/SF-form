@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { SF_FormColor } from './constants.enum'
 
 export const PhoneInputWrapper = styled.div`
   width: calc(100% - 22px);
@@ -771,11 +772,11 @@ export const PhoneInputWrapper = styled.div`
   }
   .react-tel-input .flag-dropdown.open {
     z-index: 2;
-    background: #fff;
+    background: transparent;
     border-radius: 3px 0 0 0;
   }
   .react-tel-input .flag-dropdown.open .selected-flag {
-    background: #fff;
+    background: transparent;
     border-radius: 3px 0 0 0;
   }
   .react-tel-input input[disabled] + .flag-dropdown:hover {
@@ -791,10 +792,6 @@ export const PhoneInputWrapper = styled.div`
     height: 100%;
     padding: 0 0 0 8px;
     border-radius: 3px 0 0 3px;
-  }
-  .react-tel-input .selected-flag:hover,
-  .react-tel-input .selected-flag:focus {
-    background-color: #fff;
   }
   .react-tel-input .selected-flag .flag {
     position: absolute;
@@ -830,6 +827,27 @@ export const PhoneInputWrapper = styled.div`
     overflow-y: scroll;
     border-radius: 0 0 3px 3px;
 
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      border-radius: 0px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: ${SF_FormColor.TEXTCOLOR};
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${SF_FormColor.TEXTCOLOR};
+    }
+
     @media (min-width: 381px) {
       width: 340px;
     }
@@ -846,19 +864,18 @@ export const PhoneInputWrapper = styled.div`
     padding: 7px 9px;
   }
   .react-tel-input .country-list .country .dial-code {
-    color: #6b6b6b;
+    color: ${SF_FormColor.TEXTCOLOR};
   }
   .react-tel-input .country-list .country:hover {
     background-color: #f1f1f1;
   }
-  .react-tel-input .country-list .country.highlight {
-    background-color: #f1f1f1;
-  }
+
   .react-tel-input .country-list .flag {
     margin-right: 7px;
     margin-top: 2px;
   }
   .react-tel-input .country-list .country-name {
+    color: ${SF_FormColor.TEXTCOLOR};
     margin-right: 6px;
   }
   .react-tel-input .country-list .search {
@@ -891,7 +908,7 @@ export const PhoneInputWrapper = styled.div`
     font-size: 13px;
     left: 46px;
     top: -8px;
-    background: #fff;
+    background: transparent;
     padding: 0 2px;
     color: #de0000;
   }
@@ -902,7 +919,7 @@ export const PhoneInputWrapper = styled.div`
     font-size: 13px;
     left: 46px;
     top: -8px;
-    background: #fff;
+    background: transparent;
     padding: 0 2px;
     white-space: nowrap;
   }

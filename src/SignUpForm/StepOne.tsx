@@ -155,7 +155,7 @@ export const StepOne = ({
                 <ForwardIcon />
               </PreIcon>
               <Input
-                placeholder='Addresses'
+                placeholder='Address'
                 autoComplete='off'
                 {...register('address', { required: true })}
                 onBlur={(e) => checkValid(e.target.name as keyType)}
@@ -222,7 +222,6 @@ export const StepOne = ({
                       regions={['europe']}
                       disableCountryCode={true}
                       placeholder={'Phone Number'}
-                      enableSearch
                       value={value}
                       onChange={onChange}
                       onBlur={() => checkValid('phoneNumber')}
