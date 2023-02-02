@@ -108,7 +108,6 @@ export const FieldBox = styled.div`
   flex: 1;
   height: auto;
   flex-direction: column;
-  transition: 0.5s ease-in-out;
 `
 
 export const InputWrapper = styled.div<IinputWrapperStyleProps>`
