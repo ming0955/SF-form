@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { SignUpContainer, TermsCondition } from './styles'
+import { RowSpace, SignUpContainer, TermsCondition } from './styles'
 import { Steps } from './Steps'
 import { StepOne } from './StepOne'
 import { IFormProps } from './types'
@@ -84,7 +84,7 @@ const SignUpForm = ({ firstColor, secondColor, headingTitle, subCaption, steps, 
       {currentStep === 2 && (
         <TermsCondition>
           <p>We value your privacy. We will not see or rent your email address or phone number to third parties.</p>
-          <br />
+          <RowSpace />
           <p>
             All Users are protected by our Service Guarantee. Your information will be safe as we employ the finest
             security measures to protect our members. We value your privacy and will not sell or rent your private

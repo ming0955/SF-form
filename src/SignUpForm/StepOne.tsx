@@ -17,6 +17,7 @@ import {
   InputWrapper,
   MiddleBorder,
   FieldBox,
+  HeaderContainer,
 } from './styles'
 import { errorMessages } from './constants.enum'
 
@@ -88,7 +89,7 @@ export const StepOne = ({
     const val = getValues(key)
     setValidedFields({
       ...validedFields,
-      [key]: val && val !== '' ? true : false,
+      [key]: val && val !== '' && !errors[key] ? true : false,
     })
     if (!val) {
       setError(key, { message: errorMessages[key] })
@@ -97,15 +98,18 @@ export const StepOne = ({
 
   return (
     <FormContainer>
-      <HeadingTitle>{headingTitle || 'Enter Your Information'}</HeadingTitle>
-      {subCaptionTexts.map((text, i) => {
-        return (
-          <SubCaption key={i}>
-            {text}
-            {i === 0 && ' : '}
-          </SubCaption>
-        )
-      })}
+      <HeaderContainer>
+        <HeadingTitle>{headingTitle || 'Enter Your Information'}</HeadingTitle>
+        {subCaptionTexts.map((text, i) => {
+          return (
+            <SubCaption key={i}>
+              {text}
+              {i === 0 && ' : '}
+            </SubCaption>
+          )
+        })}
+      </HeaderContainer>
+
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepOneForm'>
         <Fields>
           <FieldBox>
@@ -114,13 +118,17 @@ export const StepOne = ({
               isDirty={dirtyFields.firstName && !errors.firstName}
               isValid={validedFields.firstName}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.firstName}>
                 <ForwardIcon />
               </PreIcon>
               <Input
                 placeholder='First Name'
                 autoComplete='off'
-                {...register('firstName', { required: true })}
+                {...register('firstName', {
+                  required: true,
+                  minLength: { value: 3, message: 'First Name must be 3 characters more' },
+                  maxLength: { value: 50, message: 'First Name must be 50 characters less' },
+                })}
                 onBlur={(e) => checkValid(e.target.name as keyType)}
               />
             </InputWrapper>
@@ -136,7 +144,11 @@ export const StepOne = ({
               <Input
                 placeholder='Last Name'
                 autoComplete='off'
-                {...register('lastName', { required: true })}
+                {...register('lastName', {
+                  required: true,
+                  minLength: { value: 3, message: 'Last Name must be 3 characters more' },
+                  maxLength: { value: 50, message: 'Last Name must be 50 characters less' },
+                })}
                 onBlur={(e) => checkValid(e.target.name as keyType)}
               />
             </InputWrapper>
@@ -151,7 +163,7 @@ export const StepOne = ({
               isDirty={dirtyFields.address && !errors.address}
               isValid={validedFields.address}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.address}>
                 <ForwardIcon />
               </PreIcon>
               <Input
@@ -172,7 +184,7 @@ export const StepOne = ({
               isDirty={dirtyFields.zipCode && !errors.zipCode}
               isValid={validedFields.zipCode}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.zipCode}>
                 <ForwardIcon />
               </PreIcon>
               <Input
@@ -205,7 +217,7 @@ export const StepOne = ({
               isDirty={dirtyFields.phoneNumber && !errors.phoneNumber}
               isValid={validedFields.phoneNumber}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.phoneNumber}>
                 <ForwardIcon />
               </PreIcon>
               <Controller
@@ -240,7 +252,7 @@ export const StepOne = ({
               isDirty={dirtyFields.email && !errors.email}
               isValid={validedFields.email}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.email}>
                 <ForwardIcon />
               </PreIcon>
               <Input

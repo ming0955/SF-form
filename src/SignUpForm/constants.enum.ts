@@ -3,7 +3,7 @@ export enum SF_FormColor {
   SECONDARY = '#D9D9D9',
   TEXTACTIVE = '#737373',
   TEXTCOLOR = '#A79E9E',
-  RED = '#d32f2f',
+  RED = '#FF0000',
   BLACK = '#000000',
   BORDER = '#C4C2C2',
   PLACEHOLDER = '#D2D1D1',
@@ -11,12 +11,12 @@ export enum SF_FormColor {
 }
 
 export const errorMessages: { [key: string]: string } = {
-  firstName: 'Please enter your Firstname.',
-  lastName: 'Please enter your Lastname.',
-  address: 'Please enter your Addresses.',
-  city: 'Please enter your City address.',
-  zipCode: 'Please enter valid zipcode.',
-  phoneNumber: 'Please Enter your phone number.',
+  firstName: 'Please enter your First Name.',
+  lastName: 'Please enter your Last Name.',
+  address: 'Please enter your Address.',
+  city: 'Please enter your City.',
+  zipCode: 'Please enter valid Zipcode.',
+  phoneNumber: 'Please Enter your Phone Number.',
   email: 'Please enter your Email address.',
-  cardNumber: 'Please enter valid card number.',
+  cardNumber: 'Please enter valid Card Number.',
 }

@@ -50,6 +50,10 @@ export interface IinputStyleProps {
   fullWidth?: boolean
 }
 
+export interface IpreIconStyleProps {
+  isValid: boolean | undefined
+}
+
 export interface ErrorTextStyleProps {
   isError?: boolean | undefined
   fullWidth?: boolean

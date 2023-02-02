@@ -26,6 +26,7 @@ import {
   FirstName,
   LastName,
   CardNumber,
+  HeaderContainer,
 } from './styles'
 
 export const StepTwo = ({
@@ -42,6 +43,10 @@ export const StepTwo = ({
 }: IstepOneProps) => {
   const [subCaptionTexts, setSubCaptionTexts] = useState<string[]>([])
   const [cardNumber, setCardNumber] = useState('')
+  const [username, setUsername] = useState({
+    firstName: data?.firstName || '',
+    lastName: data?.lastName || '',
+  })
 
   const {
     register,
@@ -113,8 +118,8 @@ export const StepTwo = ({
   const UserNameBox = () => {
     return (
       <UserName>
-        <FirstName>{data?.firstName}</FirstName>
-        <LastName>{data?.lastName}</LastName>
+        <FirstName>{username.firstName}</FirstName>
+        <LastName>{username.lastName}</LastName>
       </UserName>
     )
   }
@@ -125,15 +130,17 @@ export const StepTwo = ({
 
   return (
     <FormContainer>
-      <HeadingTitle>{headingTitle || 'Enter Your Payment Details'}</HeadingTitle>
-      {subCaptionTexts.map((text, i) => {
-        return (
-          <SubCaption key={i}>
-            {text}
-            {i === 0 && ' : '}
-          </SubCaption>
-        )
-      })}
+      <HeaderContainer>
+        <HeadingTitle>{headingTitle || 'Enter Your Payment Details'}</HeadingTitle>
+        {subCaptionTexts.map((text, i) => {
+          return (
+            <SubCaption key={i}>
+              {text}
+              {i === 0 && ' : '}
+            </SubCaption>
+          )
+        })}
+      </HeaderContainer>
       <CardWrapper>
         <CardImage />
         <CardNumberBox />
@@ -143,16 +150,24 @@ export const StepTwo = ({
         <Fields>
           <FieldBox>
             <InputWrapper borderRemove={'right'} isDirty isValid>
-              <PreIcon>
+              <PreIcon isValid>
                 <ForwardIcon />
               </PreIcon>
-              <Input defaultValue={data?.firstName} placeholder='First Name' />
+              <Input
+                placeholder='First Name'
+                value={username.firstName}
+                onChange={(e) => setUsername({ ...username, firstName: e.target.value })}
+              />
             </InputWrapper>
           </FieldBox>
           <FieldBox>
             <InputWrapper borderRemove={'left'} isDirty isValid>
               <MiddleBorder />
-              <Input defaultValue={data?.lastName} placeholder='Last Name' />
+              <Input
+                placeholder='Last Name'
+                value={username.lastName}
+                onChange={(e) => setUsername({ ...username, lastName: e.target.value })}
+              />
             </InputWrapper>
           </FieldBox>
         </Fields>
@@ -164,7 +179,7 @@ export const StepTwo = ({
               isDirty={dirtyFields.cardNumber && !errors.cardNumber}
               isValid={validedFields.cardNumber}
             >
-              <PreIcon>
+              <PreIcon isValid={validedFields.cardNumber}>
                 <ForwardIcon />
               </PreIcon>
               <Input

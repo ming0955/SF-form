@@ -839,13 +839,13 @@ export const PhoneInputWrapper = styled.div`
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-      background: ${SF_FormColor.TEXTCOLOR};
+      background: ${SF_FormColor.BORDER};
       border-radius: 10px;
     }
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-      background: ${SF_FormColor.TEXTCOLOR};
+      background: ${SF_FormColor.BORDER};
     }
 
     @media (min-width: 381px) {

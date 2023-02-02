@@ -1,6 +1,13 @@
 import styled, { css } from 'styled-components'
 import { SF_FormColor } from './constants.enum'
-import { IStep, IinputStyleProps, ErrorTextStyleProps, IinputWrapperStyleProps, IButtonGroupProps } from './types'
+import {
+  IStep,
+  IinputStyleProps,
+  ErrorTextStyleProps,
+  IinputWrapperStyleProps,
+  IButtonGroupProps,
+  IpreIconStyleProps,
+} from './types'
 
 export const SignUpContainer = styled.div`
   display: flex;
@@ -47,6 +54,7 @@ export const SteperLine = styled.div<IStep>`
     right: ${(props) => (props.stepNum === 1 ? '65%' : 'unset')};
     left: ${(props) => (props.stepNum === 2 ? '65%' : 'unset')};
     font-size: 9px;
+    font-family: 'Lato';
     color: ${(props) => (props.active ? SF_FormColor.TEXTACTIVE : SF_FormColor.TEXTCOLOR)};
   }
 `
@@ -55,17 +63,25 @@ export const FormContainer = styled.div`
   display: block;
   position: relative;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 20px;
+`
+
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-bottom: 20px;
 `
 
 export const HeadingTitle = styled.h2`
   display: flex;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 22px;
   line-height: 26px;
   color: ${SF_FormColor.PRIMARY};
   margin: 10px 0;
+  font-family: 'Lato';
 `
 
 export const SubCaption = styled.p`
@@ -77,15 +93,14 @@ export const SubCaption = styled.p`
   font-size: 12px;
   line-height: 20px;
   color: #747474;
+  font-family: 'Lato';
 `
 
-export const Form = styled.form`
-  margin-top: 20px;
-`
+export const Form = styled.form``
 
 export const Fields = styled.div`
   display: flex;
-  height: 62px;
+  margin-bottom: 16px;
 `
 
 export const FieldBox = styled.div`
@@ -93,6 +108,7 @@ export const FieldBox = styled.div`
   flex: 1;
   height: auto;
   flex-direction: column;
+  transition: 0.5s ease-in-out;
 `
 
 export const InputWrapper = styled.div<IinputWrapperStyleProps>`
@@ -141,19 +157,20 @@ export const InputWrapper = styled.div<IinputWrapperStyleProps>`
 
   & input {
     color: ${SF_FormColor.TEXTACTIVE} !important;
+    font-family: 'Roboto' !important;
     &::placeholder {
       color: ${SF_FormColor.PLACEHOLDER} !important;
     }
   }
 `
 
-export const PreIcon = styled.div`
+export const PreIcon = styled.div<IpreIconStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 15px;
   height: 12px;
-  background-color: ${SF_FormColor.PLACEHOLDER};
+  background-color: ${(props) => (props.isValid ? SF_FormColor.PRIMARY : SF_FormColor.PLACEHOLDER)};
 
   svg {
     font-size: 12px;
@@ -194,17 +211,19 @@ export const ErrorText = styled.p<ErrorTextStyleProps>`
   display: flex;
   width: 100%;
   white-space: nowrap;
-  margin: 2px 0;
-  font-size: 10px;
-  line-height: 13px;
   color: ${SF_FormColor.RED};
-  font-weight: 600;
-  font-family: serif;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9px;
+  line-height: 11px;
+  margin: 0;
+  transform: translateY(3px);
 
   &::after {
     content: '';
     position: absolute;
-    top: -3px;
+    top: -4px;
     left: 0px;
     height: 1px;
     width: 100%;
@@ -223,7 +242,8 @@ export const CardWrapper = styled.div`
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 15px;
+  margin-top: -15px;
+  margin-bottom: 20px;
   height: 200px;
 
   img {
@@ -253,7 +273,8 @@ export const AgreeBox = styled.div`
 
   .MuiFormControlLabel-label {
     color: rgba(116, 116, 116, 0.5);
-    font-size: 14px;
+    font-size: 12px;
+    font-family: 'Lato';
   }
 `
 
@@ -270,7 +291,7 @@ export const ButtonGroup = styled.div<IButtonGroupProps>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: ${(props) => (props.marginTop ? '19px' : 'none')};
+  margin-top: ${(props) => (props.marginTop ? '17px' : '20px')};
 `
 
 export const ButtonWrapper = styled.div`
@@ -281,13 +302,14 @@ export const ButtonWrapper = styled.div`
 export const StepButton = styled.button`
   position: relative;
   display: flex;
-  border-radius: 8px;
   overflow: hidden;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 800;
-  font-size: 18px;
-  line-height: 25px;
+  font-size: 16px !important;
+  line-height: 21px;
   color: #fff;
+  white-space: nowrap;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
   padding: 10px 60px 8px 35px;
   background: linear-gradient(180deg, #8bb832 0%, #749c27 100%);
@@ -295,14 +317,20 @@ export const StepButton = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  &:hover {
-    transform: scale(0.99);
+
+  &:hover span {
+    transform: scale(1.01);
   }
-  &:active {
+  &:active span {
     transform: scale(1);
   }
+
+  @media (min-width: 280px) {
+    font-size: 18px !important;
+  }
+
   @media (min-width: 340px) {
-    font-size: 20px;
+    font-size: 20px !important;
   }
 `
 
@@ -397,13 +425,21 @@ export const CardNumber = styled.div`
 export const TermsCondition = styled.div`
   margin-top: 33px;
   p {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
     display: flex;
     align-items: center;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
     margin: 0;
     padding: 0;
     color: #343434;
   }
+`
+
+export const RowSpace = styled.div`
+  display: flex;
+  width: 100;
+  height: 16px;
 `
