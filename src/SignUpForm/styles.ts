@@ -73,14 +73,14 @@ export const HeaderContainer = styled.div`
   margin-bottom: 20px;
 `
 
-export const HeadingTitle = styled.h2`
+export const HeadingTitle = styled.div`
   display: flex;
   font-style: normal;
   font-weight: 800;
   font-size: 22px;
   line-height: 26px;
   color: ${SF_FormColor.PRIMARY};
-  margin: 10px 0;
+  margin: 10px 0 7px;
   font-family: 'Lato';
 `
 
@@ -91,7 +91,7 @@ export const SubCaption = styled.p`
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 18px;
   color: #747474;
   font-family: 'Lato';
 `
@@ -310,7 +310,7 @@ export const StepButton = styled.button`
   color: #fff;
   white-space: nowrap;
   text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14);
-  padding: 10px 60px 8px 35px;
+  padding: 10px 46px 10px 27px;
   background: linear-gradient(180deg, #8bb832 0%, #749c27 100%);
   box-shadow: inset 0px -0.5px 0px 0.5px #4c6c0c;
   border-radius: 5px;
