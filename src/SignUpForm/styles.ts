@@ -21,9 +21,15 @@ export const StepContainer = styled.div`
   display: flex;
 `
 
+export const StepWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`
+
 export const SteperLine = styled.div<IStep>`
   position: relative;
-  width: 50%;
   height: 2px;
   background: ${(props) =>
     props.active ? props.firstColor || SF_FormColor.PRIMARY : props.secondColor || SF_FormColor.SECONDARY};
@@ -40,23 +46,17 @@ export const SteperLine = styled.div<IStep>`
     position: absolute;
     top: -8px;
   }
-  &:before {
-    ${(props) =>
-      props.stepNum === 1
-        ? css`
-            content: 'Step1';
-          `
-        : css`
-            content: 'Step2';
-          `}
-    position: absolute;
-    top: 16px;
-    right: ${(props) => (props.stepNum === 1 ? '65%' : 'unset')};
-    left: ${(props) => (props.stepNum === 2 ? '65%' : 'unset')};
-    font-size: 9px;
-    font-family: 'Lato';
-    color: ${(props) => (props.active ? SF_FormColor.TEXTACTIVE : SF_FormColor.TEXTCOLOR)};
-  }
+`
+export const StepNum = styled.span<IStep>`
+  position: absolute;
+  display: flex;
+  font-size: 10px;
+  top: 14px;
+  font-family: 'Lato';
+  right: ${(props) => (props.stepNum === 1 ? '63%' : 'unset')};
+  left: ${(props) => (props.stepNum === 2 ? '63%' : 'unset')};
+  color: ${(props) => (props.active ? SF_FormColor.TEXTACTIVE : SF_FormColor.TEXTCOLOR)};
+  color: ${(props) => props.sucess && SF_FormColor.PRIMARY};
 `
 
 export const FormContainer = styled.div`
@@ -73,15 +73,14 @@ export const HeaderContainer = styled.div`
   margin-bottom: 20px;
 `
 
-export const HeadingTitle = styled.div`
+export const HeadingTitle = styled.p`
   display: flex;
   font-style: normal;
-  font-weight: 800;
   font-size: 22px;
   line-height: 26px;
   color: ${SF_FormColor.PRIMARY};
   margin: 10px 0 7px;
-  font-family: 'Lato';
+  font-family: 'Latoblack';
 `
 
 export const SubCaption = styled.p`
