@@ -51,7 +51,7 @@ const SignUpForm = ({ id, className, firstColor, secondColor, headingTitle, subC
           steps={steps}
         />
       )}
-      <FormContainer className='sf-form-container'>
+      <FormContainer className='sf-sign-up-form-container'>
         {currentStep === 1 && (
           <StepOne
             headingTitle={headingTitle[0]}
