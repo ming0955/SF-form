@@ -8,6 +8,7 @@ import {
   IButtonGroupProps,
   IpreIconStyleProps,
   IstepButtonsSytleProps,
+  IshowCardNumberStyle,
 } from './types'
 
 export const SignUpContainer = styled.div`
@@ -255,9 +256,10 @@ export const CardIcon = styled.div`
   display: flex;
   width: 61px;
   height: 25px;
+  justify-content: flex-end;
 
   img {
-    width: 100%;
+    width: auto;
   }
 `
 
@@ -400,6 +402,8 @@ export const UserName = styled.div`
   bottom: 13%;
   left: 7%;
   display: flex;
+  max-width: 55%;
+  overflow: hidden;
 `
 
 export const LastName = styled.p`
@@ -418,7 +422,7 @@ export const FirstName = styled(LastName)`
   margin-right: 10px;
 `
 
-export const ShowCardNumber = styled.div`
+export const ShowCardNumber = styled.div<IshowCardNumberStyle>`
   position: absolute;
   bottom: 26%;
   left: 7%;
@@ -428,6 +432,16 @@ export const ShowCardNumber = styled.div`
   @media (min-width: 481px) {
     font-size: 17px;
   }
+
+  ${({ credit }) =>
+    credit &&
+    css`
+      bottom: 33%;
+
+      @media (min-width: 481px) {
+        font-size: 26px;
+      }
+    `}
 `
 
 export const TermsCondition = styled.div`
@@ -465,5 +479,35 @@ export const Loader = styled.div`
   img {
     max-width: 100%;
     max-height: 100%;
+  }
+`
+export const ExpireDateBox = styled.div`
+  position: absolute;
+  bottom: 15px;
+  right: 35px;
+  font-size: 8px;
+  color: #fff;
+`
+export const ShowCardExpireDate = styled.div`
+  position: relative;
+  display: flex;
+`
+
+export const ExpireDatePreLabel = styled.div`
+  width: 30px;
+`
+
+export const ExpireDateTopLabel = styled.div`
+  position: absolute;
+  top: -15px;
+  right: -7px;
+`
+
+export const ExpireDateValue = styled.div`
+  font-size: 16px;
+  width: 42px;
+
+  svg {
+    width: 100%;
   }
 `
