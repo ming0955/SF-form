@@ -73,13 +73,13 @@ export default function Home() {
 ## Props
 
 | Name                  |      Type      |   Default   | Description                                                                                     |
-| :-------------------- | :------------: | :---------: | :---------------------------------------------------------------------------------------------- | ----------------------------- |
+| :-------------------- | :------------: | :---------: | :---------------------------------------------------------------------------------------------- |
 | [**firstColor**]()    |    `string`    |  `#88B431`  | Primary color of form, e.g: `button`                                                            |
 | [**secondColor**]()   |    `string`    |  `D9D9D9`   | Secondary color of form, e.g: `text`                                                            |
 | [**headingTitle**]()  | `string array` |             | Title of each step, e.g:`['Enter Your Information', 'Enter Your Payment Details']`              |
 | [**subCaption**]()    | `string array` |             | Subtitle of each step, e.g:`['Enter Your Information', 'Please fill out the following fields']` |
 | [**steps**]()         |    `number`    |     `2`     | Form data will submit in this step                                                              |
-| [**paymentMethod**]() |  `CreditCard   |   IBAN `    | `IBAN`                                                                                          | Add payment method for step 2 |
+| [**paymentMethod**]() |                |   `IBAN`    | Add payment method for step 2                                                                   |
 | [**onSubmit**]()      |   `function`   | `undefined` | Callback when submit form data                                                                  |
 
 [npm-url]: https://www.npmjs.com/package/signup-flow-package
