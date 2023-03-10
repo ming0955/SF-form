@@ -94,14 +94,44 @@ export const StepTwo = ({
   const [cardExpireDate, setCardExpireDate] = useState('')
   const creditCardPayment = paymentMethod === 'CreditCard' || paymentMethod === 'CC'
 
-  useEffect(() => {
-    const arr = formartSubcaption(subCaption)
-    setSubCaptionTexts(arr)
-  }, [subCaption])
-
   const formartSubcaption = (subCaption: string): string[] => {
     if (!subCaption) return []
     return subCaption.split(':')
+  }
+
+  const handleChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    const result = e.target.value
+    let newCardNum = ''
+
+    if (creditCardPayment) {
+      if (result.length > 19) {
+        e.preventDefault()
+        return
+      }
+      const _result = result.replace(/\s/g, '')
+      for (let i = 0; i < _result.length; i++) {
+        if (i % 4 == 0 && i > 0) newCardNum = newCardNum.concat(' ')
+        newCardNum = newCardNum.concat(_result[i])
+      }
+      cardType(newCardNum)
+    } else {
+      newCardNum = result
+        .replace(/[^\dA-Z]/g, '')
+        .replace(/(.{4})/g, '$1 ')
+        .trim()
+    }
+
+    setValue('cardNumber', result.replaceAll(' ', ''), { shouldValidate: true })
+    setCardNum(newCardNum)
+  }
+
+  const checkValidDate = (date: string) => {
+    const yy = Number('20' + date.split('/')[1])
+    const mm = Number(date.split('/')[0])
+    const expireDate = Number(new Date(yy, mm, 1, 0, 0, 0, 0))
+    const today = new Date()
+    const expectedDate = new Date().setMonth(today.getMonth() + 1)
+    return expireDate > expectedDate
   }
 
   const cardType = (inputtxt: any) => {
@@ -126,40 +156,6 @@ export const StepTwo = ({
       cardtype1 = <DiscoverIcon />
     }
     setCardIcon(cardtype1)
-  }
-
-  const handleChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = e.target.value
-    if (result.length > 19) {
-      e.preventDefault()
-      return
-    }
-    setValue('cardNumber', result.replaceAll(' ', ''), { shouldValidate: true })
-
-    let newCardNum = ''
-    if (creditCardPayment) {
-      const _result = result.replace(/\s/g, '')
-      for (let i = 0; i < _result.length; i++) {
-        if (i % 4 == 0 && i > 0) newCardNum = newCardNum.concat(' ')
-        newCardNum = newCardNum.concat(_result[i])
-      }
-      cardType(newCardNum)
-    } else {
-      newCardNum = result
-        .replace(/[^\dA-Z]/g, '')
-        .replace(/(.{4})/g, '$1 ')
-        .trim()
-    }
-    setCardNum(newCardNum)
-  }
-
-  const checkValidDate = (date: string) => {
-    const yy = Number('20' + date.split('/')[1])
-    const mm = Number(date.split('/')[0])
-    const expireDate = Number(new Date(yy, mm, 1, 0, 0, 0, 0))
-    const today = new Date()
-    const expectedDate = new Date().setMonth(today.getMonth() + 1)
-    return expireDate > expectedDate
   }
 
   const handleChangeExpireDate = (e: any) => {
@@ -218,6 +214,11 @@ export const StepTwo = ({
       }
     }
   }
+
+  useEffect(() => {
+    const arr = formartSubcaption(subCaption)
+    setSubCaptionTexts(arr)
+  }, [subCaption])
 
   useEffect(() => {
     if (creditCardPayment) {
