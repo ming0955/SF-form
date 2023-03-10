@@ -1,6 +1,6 @@
 {
   "name": "signup-flow-package",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "first react typescript package for signup-flow-app",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
