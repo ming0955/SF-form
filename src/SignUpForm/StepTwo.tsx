@@ -208,7 +208,7 @@ export const StepTwo = ({
       const isValidDate = checkValidDate(result)
 
       if (isValidDate) {
-        setValue('expireDate', result.replaceAll('/', ''), { shouldValidate: true })
+        setValue('expireDate', result, { shouldValidate: true })
       } else {
         setError('expireDate', { message: 'Please enter a valid Date.' })
       }
@@ -234,6 +234,12 @@ export const StepTwo = ({
     const newData = {
       ...data,
       cardNumber: formData.cardNumber?.replaceAll(' ', ''),
+      paymentMethod: paymentMethod || 'IBAN',
+    }
+
+    if (creditCardPayment) {
+      newData.expireDate = formData.expireDate
+      newData.cvv = formData.cvv
     }
 
     if (steps === currentStep) {
