@@ -26,7 +26,7 @@ Add `SignUpForm` to your component:
 
 ```js
 import Layout from '../layout/Layout';
-import { SignUpForm } from 'signup-flow-package';
+import { SignUpForm, useSignUpForm } from 'signup-flow-package';
 
 interface IFormProps {
   firstName?: string;
@@ -40,6 +40,11 @@ interface IFormProps {
 }
 
 export default function Home() {
+  const { steps, currentStep, isFirstStep, isLastStep, loading, setLoading, back, next } = useSignUpForm([
+    'informationForm',
+    'paymentForm'
+  ])
+
   const onSubmit = (data: IFormProps) => {
     console.log(data);
   };
@@ -60,8 +65,12 @@ export default function Home() {
             'Please fill out the following fields to create an account: *Email and password are case sensitive',
             '',
           ]}
-          steps={2}
+          steps={steps}
+          currentStep={currentStep}
+          loading={loading}
+          back={back}
           onSubmit={onSubmit}
+          paymentMethod={'CC'}
         />
       </div>
       <>
