@@ -33,7 +33,7 @@ import {
   AgreeBox,
   FieldBox,
   InputWrapper,
-  MiddleBorder,
+  // MiddleBorder,
   UserName,
   FirstName,
   LastName,
@@ -361,7 +361,7 @@ export const StepTwo = ({
                 onBlur={(e) => checkValid(e.target.name as keyType)}
                 onChange={(e) => handleChangeCardNumber(e)}
               />
-              <CardIcon>{''}</CardIcon>
+              <CardIcon>{cardIcon && null}</CardIcon>
             </InputWrapper>
             {errors.cardNumber && <ErrorBoxs message={errors.cardNumber.message || errorMessages.cardNumber} />}
           </FieldBox>
