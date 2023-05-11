@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { FormControlLabel, Checkbox } from '@mui/material'
 import { IFormProps, IstepOneProps } from './types'
 import ForwardIcon from '@mui/icons-material/Forward'
-import CancelIcon from '@mui/icons-material/Cancel'
+// import CancelIcon from '@mui/icons-material/Cancel'
 import { errorMessages } from './constants.enum'
 import {
   CardImage,
@@ -27,7 +27,7 @@ import {
   Form,
   Fields,
   Input,
-  ErrorText,
+  // ErrorText,
   PreIcon,
   CardIcon,
   AgreeBox,
@@ -248,12 +248,14 @@ export const StepTwo = ({
   }
 
   const ErrorBoxs = ({ message }: { message: string }) => {
-    return (
-      <ErrorText>
-        <CancelIcon />
-        &nbsp;{message}
-      </ErrorText>
-    )
+    console.log(message)
+    return null
+    // return (
+    //   <ErrorText>
+    //     <CancelIcon />
+    //     &nbsp;{message}
+    //   </ErrorText>
+    // )
   }
 
   type keyType = 'cardNumber' | 'expireDate' | 'cvv'
@@ -272,8 +274,8 @@ export const StepTwo = ({
   const UserNameBox = () => {
     return (
       <UserName>
-        <FirstName>{username.firstName}</FirstName>
-        <LastName>{username.lastName}</LastName>
+        <FirstName></FirstName>
+        <LastName></LastName>
       </UserName>
     )
   }

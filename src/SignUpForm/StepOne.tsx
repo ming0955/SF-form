@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
-import CancelIcon from '@mui/icons-material/Cancel'
+// import CancelIcon from '@mui/icons-material/Cancel'
 import ForwardIcon from '@mui/icons-material/Forward'
 import { IstepOneProps, IFormProps } from './types'
 import * as PSC from './phoneInput.style'
@@ -69,7 +69,7 @@ export const StepOne = ({
   const ErrorBoxs = ({ message }: { message: string }) => {
     return (
       <ErrorText>
-        <CancelIcon />
+        {/* <CancelIcon /> */}
         &nbsp;{message}
       </ErrorText>
     )
@@ -130,7 +130,7 @@ export const StepOne = ({
             <InputWrapper
               borderRemove={'left'}
               isDirty={dirtyFields.lastName && !errors.lastName}
-              isValid={validatedFields.lastName}
+              // isValid={validatedFields.lastName}
             >
               <MiddleBorder />
               <Input
