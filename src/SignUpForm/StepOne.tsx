@@ -30,7 +30,7 @@ export const StepOne = ({
   setValidatedFields,
 }: IstepOneProps) => {
   const [subCaptionTexts, setSubCaptionTexts] = useState<string[]>([])
-
+  const [initCountry, setInitCountry] = useState('us')
   const {
     register,
     handleSubmit,
@@ -60,6 +60,19 @@ export const StepOne = ({
     if (!subCaption) return []
     return subCaption.split(':')
   }
+
+  useEffect(() => {
+    fetch('https://geolocation-db.com/json/')
+      .then((response) => response.json())
+      .then((data) => {
+        const _country = (data?.country_code || 'us').toLowerCase()
+        setInitCountry(_country)
+      })
+      .catch((error) => {
+        console.error('Error fetching IP address:', error)
+        setInitCountry('us')
+      })
+  }, [])
 
   const formSubmit = async (formData: IFormProps) => {
     setData && setData(formData)
@@ -225,9 +238,9 @@ export const StepOne = ({
                 render={({ field: { value, onChange } }) => (
                   <PSC.PhoneInputWrapper>
                     <PhoneInput
-                      country={'gb'}
-                      preferredCountries={['gb']}
-                      regions={['europe']}
+                      country={initCountry}
+                      preferredCountries={[initCountry]}
+                      regions={['america', 'europe', 'asia']}
                       disableCountryCode={true}
                       placeholder={'Phone Number'}
                       value={value}
