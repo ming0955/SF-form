@@ -320,27 +320,22 @@ export const StepTwo = ({
       <Form onSubmit={handleSubmit((data) => formSubmit(data))} id='stepTwoForm'>
         <Fields>
           <FieldBox>
-            <InputWrapper borderRemove={'right'} isDirty isValid>
+            <InputWrapper borderRemove={'none'} isDirty isValid>
               <PreIcon isValid>
                 <ForwardIcon />
               </PreIcon>
               <Input
-                placeholder='First Name'
-                value={username.firstName}
+                placeholder='Card holer'
                 onChange={(e) => setUsername({ ...username, firstName: e.target.value })}
               />
             </InputWrapper>
           </FieldBox>
-          <FieldBox>
+          {/* <FieldBox>
             <InputWrapper borderRemove={'left'} isDirty isValid>
               <MiddleBorder />
-              <Input
-                placeholder='Last Name'
-                value={username.lastName}
-                onChange={(e) => setUsername({ ...username, lastName: e.target.value })}
-              />
+              <Input placeholder='' onChange={(e) => setUsername({ ...username, lastName: e.target.value })} />
             </InputWrapper>
-          </FieldBox>
+          </FieldBox> */}
         </Fields>
 
         <Fields>
@@ -354,7 +349,7 @@ export const StepTwo = ({
                 <ForwardIcon />
               </PreIcon>
               <Input
-                placeholder={creditCardPayment ? '4242 4242 4242 4242' : '0000 0000 0000 0000 0000 00'}
+                placeholder={creditCardPayment ? 'Card Number' : '0000 0000 0000 0000 0000 00'}
                 autoComplete='off'
                 value={cardNum}
                 {...register('cardNumber', {
@@ -366,7 +361,7 @@ export const StepTwo = ({
                 onBlur={(e) => checkValid(e.target.name as keyType)}
                 onChange={(e) => handleChangeCardNumber(e)}
               />
-              <CardIcon>{cardIcon}</CardIcon>
+              <CardIcon>{''}</CardIcon>
             </InputWrapper>
             {errors.cardNumber && <ErrorBoxs message={errors.cardNumber.message || errorMessages.cardNumber} />}
           </FieldBox>
