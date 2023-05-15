@@ -101,7 +101,7 @@ const SignUpForm = ({
         )}
       </FormContainer>
 
-      {message && message !== '' && <ErrorBox>{message}</ErrorBox>}
+      {message && message !== '' && <ErrorBox className='sf-form-message-box'>{message}</ErrorBox>}
 
       <StepButtons currentStep={currentStep} steps={steps} loading={loading} back={back} />
       {currentStep === 2 && (
