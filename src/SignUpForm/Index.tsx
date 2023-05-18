@@ -101,9 +101,15 @@ const SignUpForm = ({
         )}
       </FormContainer>
 
-      {message && message !== '' && <ErrorBox className='sf-form-message-box'>{message}</ErrorBox>}
+      {message && message !== '' && <ErrorBox>{message}</ErrorBox>}
 
-      <StepButtons currentStep={currentStep} steps={steps} loading={loading} back={back} />
+      <StepButtons
+        currentStep={currentStep}
+        steps={steps}
+        loading={loading}
+        back={back}
+        paymentMethod={paymentMethod}
+      />
       {currentStep === 2 && (
         <TermsCondition>
           <p>We value your privacy. We will not see or rent your email address or phone number to third parties.</p>
